@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/dk8704/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-21.0.3_e468270b22815497c6d98199aeb53fb834bba891/classes.dex" />
+    </item>
+    <item
+        jar="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-21.0.3_76e81c4624e02ee36babdaf3df1c1fe2f8bda556/classes.dex" />
+    </item>
+    <item
+        jar="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/libs/internal_impl-21.0.3.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-21.0.3_1c7e4d375e71c900dfccc34d67b4f59f93d1ad42/classes.dex" />
+    </item>
+    <item
+        jar="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="0a3a26066d31f831059fecab96b9d3f47f606e9e">
+        <dex dex="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_11ba28af6d621d10b2d91f09ad7884fbfc1c2257/classes.dex" />
+    </item>
+    <item
+        jar="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-21.0.3_73d5e65ee3873b0de2042aa77eac9f705e7c6444/classes.dex" />
+    </item>
+    <item
+        jar="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="855ec2cc2029dc7c1168fef3d182e219199f85ac">
+        <dex dex="/Users/dk8704/AndroidStudioProjects/theGame/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d691705b6e107c393da717ab1893c0029ac9fe61/classes.dex" />
+    </item>
+
+</items>

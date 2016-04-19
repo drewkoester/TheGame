@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MyActivity" >
+    <item
+        android:id="@+id/action_new_game"
+        android:orderInCategory="200"
+        android:title="New Game"
+        app:showAsAction="ifRoom"
+        ></item>
+    <item
+        android:id="@+id/action_rules"
+        android:orderInCategory="300"
+        android:title="Rules"
+        app:showAsAction="ifRoom"></item>
+</menu>
