@@ -3,6 +3,7 @@ package com.dkstuff.random.thegame;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
@@ -12,16 +13,25 @@ import android.widget.TextView;
 import android.view.Menu;
 import android.os.SystemClock;
 import android.view.MenuItem;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
+import android.content.SharedPreferences;
+import android.content.Context;
+import android.widget.RadioButton;
+import android.view.View;
 
 import java.util.Random;
 
 public class MainActivity extends Activity implements OnDragListener, View.OnLongClickListener {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "theGameActivity";
+    public static final String PREFS_NAME = "theGamePrefs";
 
     //card deck
     private int deckSize = 98;
     private int deckPosition = 0;
+    public boolean easyMode = false;
     private Cards[] cards = new Cards[deckSize];
     private boolean cardsCreated = false;
     public Cards movedCard;
@@ -35,16 +45,18 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
     private Foundations zero_two = new Foundations();
 
     //timer for how long you have played
-    private long startTime = 0L;
+    public long startTime = 0L;
     long timeInMilliseconds = 0L;
 
-
+    private int turnsPlayed = 0;
+    private int remainingCards = deckSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setGameDefaults();
 
         //register a long click listener for the balls
         findViewById(R.id.soccer).setOnLongClickListener(this);
@@ -57,19 +69,24 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         findViewById(R.id.stock_cards).setOnDragListener(this);
         findViewById(R.id.foundation_piles).setOnDragListener(this);
 
-        //TODO: move these elsewhere
-        /* Draw a Card. */
+        /* End Turn. */
         findViewById(R.id.end_turn_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //check hand size
-                while(player1.getEmptySlots() > 0){
+                while (player1.getEmptySlots() > 0) {
                     //draw card
                     drawCard(player1);
                 }
                 //set to view
                 playersCards = player1.getPlayerCards();
                 setValuesToStock();
+
+                //todo: fix why this no work
+//                //check that there are any valid plays left; if none left alert the player.
+//                if(!checkForValidPlay(player1)){
+//                    alertMessage();
+//                }
 
                 //increase turn count
                 increaseTurn();
@@ -81,36 +98,77 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         startNewGame();
     }
 
+    /**
+     * Set the game defaults determined by the SharedPreferences
+     */
+    private void setGameDefaults() {
+        // Restore preferences
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        int gameDifficulty = settings.getInt("gameDifficulty", 3);
+
+        //Reset the rules based on preferences
+        switch (gameDifficulty) {
+            case 3:
+                Log.d(TAG, "NORMAL");
+                deckSize = 98;
+                easyMode = false;
+                break;
+
+            case 2:
+                Log.d(TAG, "Quick");
+                deckSize = 48;
+                easyMode = false;
+                break;
+
+            case 1:
+                Log.d(TAG, "Easy");
+                deckSize = 48;
+                easyMode = true;
+                break;
+        }
+
+        //set the card object based on the new deck size
+        cards = new Cards[deckSize];
+
+        //Set the foundation piles text.
+        String foundationPileText = deckSize + 2 + " " + getString(R.string.foundation_pile_down);
+        TextView t = (TextView) findViewById(R.id.hundred_one_key);
+        t.setText(foundationPileText);
+        t = (TextView) findViewById(R.id.hundred_two_key);
+        t.setText(foundationPileText);
+    }
+
     //todo bad bad coding
-    private void setValuesToStock(){
+    private void setValuesToStock() {
         //spot 1
-        TextView localTextView = (TextView)findViewById(R.id.rugby);
-        localTextView.setText(""+playersCards[0].getValue());
+        TextView localTextView = (TextView) findViewById(R.id.rugby);
+        localTextView.setText("" + playersCards[0].getValue());
         localTextView.setVisibility(View.VISIBLE);
 
         //spot 2
-        localTextView = (TextView)findViewById(R.id.hand_card_2);
-        localTextView.setText(""+playersCards[1].getValue());
+        localTextView = (TextView) findViewById(R.id.hand_card_2);
+        localTextView.setText("" + playersCards[1].getValue());
         localTextView.setVisibility(View.VISIBLE);
 
         //spot 3
-        localTextView = (TextView)findViewById(R.id.soccer);
-        localTextView.setText(""+playersCards[2].getValue());
+        localTextView = (TextView) findViewById(R.id.soccer);
+        localTextView.setText("" + playersCards[2].getValue());
         localTextView.setVisibility(View.VISIBLE);
 
         //spot 4
-        localTextView = (TextView)findViewById(R.id.tennis2);
-        localTextView.setText(""+playersCards[3].getValue());
+        localTextView = (TextView) findViewById(R.id.tennis2);
+        localTextView.setText("" + playersCards[3].getValue());
         localTextView.setVisibility(View.VISIBLE);
 
         //spot 5
-        localTextView = (TextView)findViewById(R.id.soccer3);
-        localTextView.setText(""+playersCards[4].getValue());
+        localTextView = (TextView) findViewById(R.id.soccer3);
+        localTextView.setText("" + playersCards[4].getValue());
         localTextView.setVisibility(View.VISIBLE);
     }
 
     /**
      * Menu Options
+     *
      * @param item MenuItem selected
      * @return
      */
@@ -150,27 +208,27 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         //Log.d(TAG, ""+imageView.getId());
         movingId = imageView.getId();
         //spot 1
-        if(imageView.getId() == R.id.rugby){
+        if (imageView.getId() == R.id.rugby) {
             movedCard = playersCards[0];
         }
         //spot 2
-        else if(imageView.getId() == R.id.hand_card_2){
+        else if (imageView.getId() == R.id.hand_card_2) {
             movedCard = playersCards[1];
         }
         //spot 3
-        else if(imageView.getId() == R.id.soccer){
+        else if (imageView.getId() == R.id.soccer) {
             movedCard = playersCards[2];
         }
         //spot 4
-        else if(imageView.getId() == R.id.tennis2){
+        else if (imageView.getId() == R.id.tennis2) {
             movedCard = playersCards[3];
         }
         //spot 5
-        else if(imageView.getId() == R.id.soccer3){
+        else if (imageView.getId() == R.id.soccer3) {
             movedCard = playersCards[4];
         }
 
-        if(movedCard == null || movedCard.getValue() == 0){
+        if (movedCard == null || movedCard.getValue() == 0) {
             return false;
         }
         //Log.d(TAG, "Moving Card Value: " + movedCard.getValue());
@@ -199,7 +257,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         switch (dragEvent.getAction()) {
 
             case DragEvent.ACTION_DRAG_STARTED:
-                
+
                 //todo: Determine if this is needed
                 // Determines if this View can accept the dragged data
                 if (dragEvent.getClipDescription()
@@ -208,7 +266,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                     // returns true to indicate that the View can accept the dragged data.
                     return true;
 
-                } 
+                }
 
                 // Returns false. During the current drag and drop operation, this View will
                 // not receive events again until ACTION_DRAG_ENDED is sent.
@@ -233,7 +291,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
             case DragEvent.ACTION_DROP:
 
                 //Get the Card Value
-                if(movedCard == null){
+                if (movedCard == null) {
                     return false;
                 }
                 //Log.d(TAG, "Moving to: "+movedCard.getValue());
@@ -241,12 +299,12 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                 //Get the Foundation Pile (value, direction)
                 Foundations foundationPile = checkLocation(dragEvent);
 
-                if(foundationPile != null){
+                if (foundationPile != null) {
                     //check the Card Value vs Foundation Pile
                     boolean isValidMove = foundationPile.isValidPlay(movedCard);
 
                     //If Value - move the card
-                    if(isValidMove){
+                    if (isValidMove) {
                         //Log.d(TAG, "wasMoved: "+isValidMove);
 
                         //play the card
@@ -262,8 +320,8 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                         movedCard = null;
 
                         // reset to 0
-                        if(movingId != 0){
-                            TextView localTextView = (TextView)findViewById(movingId);
+                        if (movingId != 0) {
+                            TextView localTextView = (TextView) findViewById(movingId);
                             localTextView.setText("");
                         }
 
@@ -277,14 +335,14 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                     }
 
                 }
-                
+
                 return false;
 
             case DragEvent.ACTION_DRAG_ENDED:
                 //if the drop was not successful, set the card to visible
                 if (!dragEvent.getResult()) {
                     Log.i(TAG, "setting visible");
-                    if(movedCard != null){
+                    if (movedCard != null) {
                         draggedImageView.setVisibility(View.VISIBLE);
                     }
 
@@ -300,7 +358,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         return false;
     }
 
-    private void updateDisplay(final Cards c, final Foundations f){
+    private void updateDisplay(final Cards c, final Foundations f) {
         // globally
         TextView localTextView = (TextView) findViewById(f.getId());
         localTextView.setText(Integer.toString(c.getValue()));
@@ -313,18 +371,22 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         onehundred_one.setStartingPosition(100);
         onehundred_one.setIncreaseDirection(false);
         onehundred_one.setId(R.id.hundred_one);
+        onehundred_one.setEasyMode(easyMode);
 
         onehundred_two.setStartingPosition(100);
         onehundred_two.setIncreaseDirection(false);
         onehundred_two.setId(R.id.hundred_two);
+        onehundred_two.setEasyMode(easyMode);
 
         zero_one.setStartingPosition(0);
         zero_one.setIncreaseDirection(true);
         zero_one.setId(R.id.zero_one);
+        zero_one.setEasyMode(easyMode);
 
         zero_two.setStartingPosition(0);
         zero_two.setIncreaseDirection(true);
         zero_two.setId(R.id.zero_two);
+        zero_two.setEasyMode(easyMode);
 
         createCards();
     }
@@ -332,7 +394,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
     /**
      * Create a new deck of cards.  This should handle setting up the objects
      */
-    private void createCards() {
+    public void createCards() {
         for (int i = 0; i < deckSize; i++) {
             cards[i] = new Cards();
             cards[i].setValue(1 + i);
@@ -362,7 +424,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      *
      * @param player the player who is going to draw cards
      */
-    private void drawCard(Player player) {
+    public void drawCard(Player player) {
         Cards drawCard = null;
         boolean found = false;
 
@@ -412,19 +474,19 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         zero_two.resetGame();
 
         //set the labels
-        TextView localTextView = (TextView)findViewById(R.id.hundred_one);
-        localTextView.setText("100 DOWN");
+        TextView localTextView = (TextView) findViewById(R.id.hundred_one);
+        localTextView.setText(deckSize + 2 + " DOWN");
 
         //spot 2
-        localTextView = (TextView)findViewById(R.id.hundred_two);
-        localTextView.setText("100 DOWN");
+        localTextView = (TextView) findViewById(R.id.hundred_two);
+        localTextView.setText(deckSize + 2 + " DOWN");
 
         //spot 3
-        localTextView = (TextView)findViewById(R.id.zero_one);
+        localTextView = (TextView) findViewById(R.id.zero_one);
         localTextView.setText("0 UP");
 
         //spot 4
-        localTextView = (TextView)findViewById(R.id.zero_two);
+        localTextView = (TextView) findViewById(R.id.zero_two);
         localTextView.setText("0 UP");
 
 
@@ -433,15 +495,15 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
 
         //reset counts
         turnsPlayed = 0;
-        remainingCards = deckSize+1;
+        remainingCards = deckSize + 1;
 
         //start the play counter
-        startTime = SystemClock.uptimeMillis();
+        startTime = System.currentTimeMillis();//SystemClock.uptimeMillis();
 
         //reset last few things
         setRemainingCards();
         findViewById(R.id.end_turn_btn).performClick();
-        Log.d(TAG, "Turns2: "+turnsPlayed);
+        Log.d(TAG, "Turns2: " + turnsPlayed);
     }
 
     /**
@@ -449,7 +511,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      *
      * @param ar array of cards
      */
-    private void shuffleDeck(Cards[] ar) {
+    public void shuffleDeck(Cards[] ar) {
         //if cards haven't been created do that now.
         if (!cardsCreated) {
             createCards();
@@ -474,7 +536,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      * @param dragEvent the card that the player is moving around
      * @return the spot that the card is likely to be played at
      */
-    private Foundations checkLocation(final DragEvent dragEvent) {
+    public Foundations checkLocation(final DragEvent dragEvent) {
         final View onehundred_one_view = findViewById(R.id.hund_one_lay);
         final View onehundred_two_view = findViewById(R.id.hund_two_lay);
         final View zero_one_view = findViewById(R.id.zero_one_lay);
@@ -500,18 +562,18 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      * @param dragEvent the dynamic view (the card that is being moved)
      * @return true if the point exists within the pile; else false
      */
-    private boolean checkPileMatch(final View playSpot, final DragEvent dragEvent) {
+    public boolean checkPileMatch(final View playSpot, final DragEvent dragEvent) {
         //card coordinates
         int x = (int) dragEvent.getX();
         int y = (int) dragEvent.getY();
-        Log.d(TAG, "Card: " + x + " " + y);
+        //Log.d(TAG, "Card: " + x + " " + y);
 
         //foundation pile coordinates
         int x21 = playSpot.getLeft();
         int y21 = playSpot.getTop();
         int x22 = playSpot.getRight();
         int y22 = playSpot.getBottom();
-        Log.d(TAG, "Spot: " + x21 + " " + y21 + " " + x22 + " " + y22);
+        //Log.d(TAG, "Spot: " + x21 + " " + y21 + " " + x22 + " " + y22);
 
         //math stuff
         if ((x21 <= x) && (x <= x22) && (y21 <= y) && (y <= y22)) {
@@ -521,47 +583,111 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         return false;
     }
 
-    private int remainingCards = deckSize;
-    private void setRemainingCards(){
-        remainingCards = remainingCards -1;
 
-        TextView localTextView = (TextView)findViewById(R.id.remaining_cards);
-        localTextView.setText("Cards Left: "+remainingCards);
+    /**
+     * Set the remaining deck cards (for display)
+     */
+    public void setRemainingCards() {
+        remainingCards = remainingCards - 1;
+
+        TextView localTextView = (TextView) findViewById(R.id.remaining_cards);
+        localTextView.setText("Cards Left: " + remainingCards);
     }
 
-    private int turnsPlayed = 0;
-    private void increaseTurn(){
+
+    /**
+     * Increase the count for the number of turns played (for display)
+     */
+    public void increaseTurn() {
         turnsPlayed = turnsPlayed + 1;
 
-        TextView localTextView = (TextView)findViewById(R.id.turns_played);
-        localTextView.setText("Turns Played: "+turnsPlayed);
-        Log.d(TAG, "Turns: "+turnsPlayed);
+        TextView localTextView = (TextView) findViewById(R.id.turns_played);
+        localTextView.setText("Turns Played: " + turnsPlayed);
+        Log.d(TAG, "Turns: " + turnsPlayed);
     }
 
 
     /**
      * Check the player's hand vs the foundation piles to determine if a valid play exists.  If
-     *  no play exists indicate end game.
+     * no play exists indicate end game.
+     *
      * @return a value of true indicates a valid play exists for the player.
      */
-    private boolean checkForValidPlay(Player p){
+    public boolean checkForValidPlay(Player p) {
         boolean validPlayExists = false;
 
-        for(Cards c: p.getPlayerCards()){
-            if(onehundred_one.isValidPlay(c)){
+        for (Cards c : p.getPlayerCards()) {
+            if (onehundred_one.isValidPlay(c)) {
                 validPlayExists = true;
             }
-            if(onehundred_two.isValidPlay(c)){
+            if (onehundred_two.isValidPlay(c)) {
                 validPlayExists = true;
             }
-            if(zero_one.isValidPlay(c)){
+            if (zero_one.isValidPlay(c)) {
                 validPlayExists = true;
             }
-            if(zero_two.isValidPlay(c)){
+            if (zero_two.isValidPlay(c)) {
                 validPlayExists = true;
             }
         }
         return validPlayExists;
+    }
+
+    /**
+     * Display a message to the user that contains 'end-game' information.
+     */
+    public void alertMessage() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        // set title
+        alertDialogBuilder.setTitle("No More Moves!");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Click yes to play again!" +
+                        "\nCards Played: " + remainingCards +
+                        "\nTurns Played: " + turnsPlayed +
+                        "\nTime Played: " + returnTimePlayed())
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Button (Yes) clicked: startNewGame and close
+                        startNewGame();
+                        MainActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Button (No) clicked: go to main screen and close
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(i);
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
+
+    /**
+     * Determine the amount of time that the user has been playing for
+     *
+     * @return message containing the amount of time
+     */
+    public String returnTimePlayed() {
+        String message = "";
+        timeInMilliseconds = System.currentTimeMillis() - startTime;
+
+        int secs = (int) (timeInMilliseconds / 1000);
+        int mins = secs / 60;
+        secs = secs % 60;
+
+        message = "" + mins + ":" + String.format("%02d", secs);
+
+        return message;
     }
 
 }

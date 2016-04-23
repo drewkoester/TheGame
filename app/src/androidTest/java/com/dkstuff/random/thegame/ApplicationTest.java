@@ -1,4 +1,4 @@
-package com.random.dkstuff.testdragger;
+package com.dkstuff.random.thegame;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

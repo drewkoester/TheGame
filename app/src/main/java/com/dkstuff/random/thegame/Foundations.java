@@ -12,6 +12,7 @@ public class Foundations {
     int currentValue = startingPosition;
     UUID idOne = UUID.randomUUID();
     int id = 0;
+    boolean easyMode = false;
 
     ArrayList<Cards> playedCards = new ArrayList<>();
 
@@ -28,6 +29,9 @@ public class Foundations {
     public void setIncreaseDirection(boolean increaseDirection){
         this.increaseDirection = increaseDirection;
     }
+    public void setEasyMode(boolean easyMode){
+        this.easyMode = easyMode;
+    }
 
     public UUID getIdOne(){
         return idOne;
@@ -42,39 +46,39 @@ public class Foundations {
      * @return true if the card played is legal and false if the play is illegal
      */
     public boolean isValidPlay(Cards cardPlayed){
+        boolean setValue = false;
         //ascending (1,2,3)
         if(increaseDirection){
             if(cardPlayed.getValue() > currentValue){
-                //update currentValue
-                currentValue = cardPlayed.getValue();
-                playedCards.add(cardPlayed);
-                return true;
+                setValue = true;
             }else if(cardPlayed.getValue() == currentValue-10){
-                //update currentValue
-                currentValue = cardPlayed.getValue();
-                playedCards.add(cardPlayed);
-
-                return true;
+                setValue = true;
+            }else if(easyMode
+                    && (currentValue-cardPlayed.getValue())%10==0
+                    && cardPlayed.getValue() < currentValue){
+                setValue = true;
             }
         }
         //descending (99, 98, etc)
         else{
             if(cardPlayed.getValue() < currentValue){
-                //update currentValue
-                currentValue = cardPlayed.getValue();
-                playedCards.add(cardPlayed);
-
-                return true;
+                setValue = true;
             }else if(cardPlayed.getValue() == currentValue+10){
-                //update currentValue
-                currentValue = cardPlayed.getValue();
-                playedCards.add(cardPlayed);
-
-                return true;
+                setValue = true;
+            }else if(easyMode
+                    && cardPlayed.getValue() > currentValue
+                    && (cardPlayed.getValue()-currentValue)%10 == 0){
+                setValue = true;
             }
         }
 
-        return false;
+        if(setValue){
+            //update currentValue
+            currentValue = cardPlayed.getValue();
+            playedCards.add(cardPlayed);
+        }
+
+        return setValue;
     }
 
     public void playCard(Cards cardPlayed){
