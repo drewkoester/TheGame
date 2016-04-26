@@ -21,6 +21,8 @@ import android.content.Context;
 import android.widget.RadioButton;
 import android.view.View;
 
+import java.lang.reflect.Array;
+
 import java.util.Random;
 
 public class MainActivity extends Activity implements OnDragListener, View.OnLongClickListener {
@@ -29,8 +31,8 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
     public static final String PREFS_NAME = "theGamePrefs";
 
     //card deck
-    private int deckSize = 98;
-    private int deckPosition = 0;
+    public int deckSize = 98;
+    public int deckPosition = 0;
     public boolean easyMode = false;
     private Cards[] cards = new Cards[deckSize];
     private boolean cardsCreated = false;
@@ -74,20 +76,21 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
             @Override
             public void onClick(View v) {
                 //check hand size
-                while (player1.getEmptySlots() > 0) {
+                while (player1.getEmptySlots() > 0 && (deckSize != deckPosition)) {
                     //draw card
                     drawCard(player1);
-                }
+
                 //set to view
                 playersCards = player1.getPlayerCards();
                 setValuesToStock();
 
                 //todo: fix why this no work
-//                //check that there are any valid plays left; if none left alert the player.
-//                if(!checkForValidPlay(player1)){
-//                    alertMessage();
-//                }
+                //check that there are any valid plays left; if none left alert the player.
+                if(!checkForValidPlay(player1)){
+                    alertMessage();
+                }
 
+                }
                 //increase turn count
                 increaseTurn();
             }
@@ -110,19 +113,19 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         switch (gameDifficulty) {
             case 3:
                 Log.d(TAG, "NORMAL");
-                deckSize = 98;
+                deckSize = 99;
                 easyMode = false;
                 break;
 
             case 2:
                 Log.d(TAG, "Quick");
-                deckSize = 48;
+                deckSize = 49;
                 easyMode = false;
                 break;
 
             case 1:
                 Log.d(TAG, "Easy");
-                deckSize = 48;
+                deckSize = 9; //48
                 easyMode = true;
                 break;
         }
@@ -131,7 +134,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         cards = new Cards[deckSize];
 
         //Set the foundation piles text.
-        String foundationPileText = deckSize + 2 + " " + getString(R.string.foundation_pile_down);
+        String foundationPileText = deckSize + 1 + " " + getString(R.string.foundation_pile_down);
         TextView t = (TextView) findViewById(R.id.hundred_one_key);
         t.setText(foundationPileText);
         t = (TextView) findViewById(R.id.hundred_two_key);
@@ -301,7 +304,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
 
                 if (foundationPile != null) {
                     //check the Card Value vs Foundation Pile
-                    boolean isValidMove = foundationPile.isValidPlay(movedCard);
+                    boolean isValidMove = foundationPile.isValidPlay(movedCard, false);
 
                     //If Value - move the card
                     if (isValidMove) {
@@ -310,13 +313,13 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                         //play the card
                         foundationPile.playCard(movedCard);
 
-                        //todo: update the pile card display
+                        //update the foundation pile value
                         updateDisplay(movedCard, foundationPile);
 
                         //remove from hand
                         player1.removeCard(movedCard.getPosition());
 
-                        //todo fix this
+                        //set the movedCard to null indicating it is done
                         movedCard = null;
 
                         // reset to 0
@@ -341,7 +344,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
             case DragEvent.ACTION_DRAG_ENDED:
                 //if the drop was not successful, set the card to visible
                 if (!dragEvent.getResult()) {
-                    Log.i(TAG, "setting visible");
+                    //Log.i(TAG, "setting visible");
                     if (movedCard != null) {
                         draggedImageView.setVisibility(View.VISIBLE);
                     }
@@ -409,15 +412,15 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      *
      * @return the number of cards remaining within the deck
      */
-    private int getDeckSize() {
-        int remainingCards = 0;
-        for (Cards c : cards) {
-            if (c.getLocation().equals("DECK")) {
-                remainingCards++;
-            }
-        }
-        return remainingCards;
-    }
+//    private int getDeckSize() {
+//        int remainingCards = 0;
+//        for (Cards c : cards) {
+//            if (c.getLocation().equals("DECK")) {
+//                remainingCards++;
+//            }
+//        }
+//        return remainingCards;
+//    }
 
     /**
      * For a given player, draw cards until the limit is reached
@@ -428,33 +431,42 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         Cards drawCard = null;
         boolean found = false;
 
+        Log.d("DRAW: ", deckPosition + " | " + deckSize);
         //check to see if we can keep drawing
-        if (player.keepDrawing()) {
-            //get the top card and remove it from the deck
-            for (Cards c : cards) {
-                if (!found && c.getPosition() == deckPosition) {
-                    drawCard = c;
-                    c.setLocation(player.getPlayerID());
-                    found = true;
-                }
-            }
-
-            //add it to the person's hand
-            player.addCard(drawCard);
-
-            //show cards
-            //Cards[] tempCards = player.getPlayerCards();
-
-            //need to move the deck position so we can keep drawing
-            deckPosition++;
-
-            //check the limit and repeat
+        if(deckPosition != deckSize){
             if (player.keepDrawing()) {
-                drawCard(player);
+                //get the top card and remove it from the deck
+                for (Cards c : cards) {
+                    if (!found && c.getPosition() == deckPosition) {
+                        drawCard = c;
+                        c.setLocation(player.getPlayerID());
+                        found = true;
+                    }
+                }
+
+                //add it to the person's hand
+                //Log.d("CARD: ", deckPosition+" | "+ deckSize);
+                //if(deckPosition < deckSize){
+                player.addCard(drawCard);
+                //}
+
+                //show cards
+                //Cards[] tempCards = player.getPlayerCards();
+
+                //need to move the deck position so we can keep drawing
+                deckPosition++;
+
+                //check the limit and repeat
+                if (player.keepDrawing()) {
+                    drawCard(player);
+                }
+            } else {
+                Log.d(TAG, "ENOUGH CARDS");
             }
-        } else {
-            Log.d(TAG, "ENOUGH CARDS");
+        }else{
+            Log.d(TAG, "NO MORE CARDS");
         }
+
     }
 
     /**
@@ -474,20 +486,21 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         zero_two.resetGame();
 
         //set the labels
+        String deckDown = deckSize + 1 + "";
         TextView localTextView = (TextView) findViewById(R.id.hundred_one);
-        localTextView.setText(deckSize + 2 + " DOWN");
+        localTextView.setText(deckDown);
 
         //spot 2
         localTextView = (TextView) findViewById(R.id.hundred_two);
-        localTextView.setText(deckSize + 2 + " DOWN");
+        localTextView.setText(deckDown);
 
         //spot 3
         localTextView = (TextView) findViewById(R.id.zero_one);
-        localTextView.setText("0 UP");
+        localTextView.setText("0");
 
         //spot 4
         localTextView = (TextView) findViewById(R.id.zero_two);
-        localTextView.setText("0 UP");
+        localTextView.setText("0");
 
 
         //deck
@@ -617,16 +630,16 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         boolean validPlayExists = false;
 
         for (Cards c : p.getPlayerCards()) {
-            if (onehundred_one.isValidPlay(c)) {
+            if (onehundred_one.isValidPlay(c, true)) {
                 validPlayExists = true;
             }
-            if (onehundred_two.isValidPlay(c)) {
+            if (onehundred_two.isValidPlay(c, true)) {
                 validPlayExists = true;
             }
-            if (zero_one.isValidPlay(c)) {
+            if (zero_one.isValidPlay(c, true)) {
                 validPlayExists = true;
             }
-            if (zero_two.isValidPlay(c)) {
+            if (zero_two.isValidPlay(c, true)) {
                 validPlayExists = true;
             }
         }
@@ -688,6 +701,55 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         message = "" + mins + ":" + String.format("%02d", secs);
 
         return message;
+    }
+
+    /**
+     * Increase the statistics for the game
+     *
+     * @param win {boolean} if the game was successfully won or not
+     */
+    private void setGameStatistics(boolean win) {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        int gameDifficulty = settings.getInt("gameDifficulty", 3);
+
+        if (win) {
+            int winCount = settings.getInt("winCount" + gameDifficulty, 0);
+            editor.putInt("winCount" + gameDifficulty, winCount + 1);
+        }
+
+        int gameCount = settings.getInt("gameCount" + gameDifficulty, 0);
+        editor.putInt("gameCount" + gameDifficulty, gameCount + 1);
+
+        // Commit the edits
+        editor.commit();
+    }
+
+    public boolean checkDeckDrawRatio(){
+        if(deckPosition < deckSize){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns the statistics associated with the supplied difficulty.
+     *
+     * @param gameDifficulty {int} difficulty level (1-3)
+     * @return {Object} element[0]=winCount, element[1]=gameCount
+     */
+    private Object getGameStatistics(int gameDifficulty) {
+        Object[] tempStats = new Object[2];
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        //int gameDifficulty = settings.getInt("gameDifficulty", 3);
+        int winCount = settings.getInt("winCount" + gameDifficulty, 0);
+        int gameCount = settings.getInt("gameCount" + gameDifficulty, 0);
+
+        tempStats[0] = winCount;
+        tempStats[1] = gameCount;
+
+        return tempStats;
     }
 
 }

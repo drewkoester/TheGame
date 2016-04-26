@@ -1,6 +1,6 @@
 package com.dkstuff.random.thegame;
 import java.util.UUID;
-
+import android.util.Log;
 /**
  * Created by dk8704 on 4/14/16.
  */
@@ -15,6 +15,8 @@ public class Player {
             if(!cardAdded && handCards[i] == null){
                 addCard.setPosition(i);
                 handCards[i] = addCard;
+
+                //Log.d("PLAYER", handCards[i].getValue()+" | "+ i);
                 cardAdded = true;
             }
         }
@@ -34,6 +36,10 @@ public class Player {
 
     public Cards[] getPlayerCards(){
         return handCards;
+    }
+
+    public int getPlayersCardCount(){
+        return handCards.length;
     }
 
     /**

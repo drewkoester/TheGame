@@ -63,8 +63,7 @@
                 android:background="@drawable/layout_bg"
                 android:elevation="20dp"
                 android:gravity="center"
-                android:src="@drawable/number1"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/hand_card_2"
@@ -103,7 +102,6 @@
                 android:background="@drawable/layout_bg"
                 android:elevation="20dp"
                 android:gravity="center"
-                android:src="@drawable/number4"
                 android:textStyle="bold" />
 
             <TextView
@@ -117,7 +115,6 @@
                 android:background="@drawable/layout_bg"
                 android:elevation="20dp"
                 android:gravity="center"
-                android:src="@drawable/number5"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -163,8 +160,14 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:src="@drawable/back_of_card"
-                android:text="@string/foundation_pile_hund"
+                android:text="@string/hundred"
                 android:textStyle="bold" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/down_arrow"
+                android:elevation="-20dp"
+                android:tint="@color/grey"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -190,8 +193,14 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:src="@drawable/back_of_card"
-                android:text="@string/foundation_pile_hund"
+                android:text="@string/hundred"
                 android:textStyle="bold" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/down_arrow"
+                android:elevation="-20dp"
+                android:tint="@color/grey"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -217,8 +226,15 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:src="@drawable/back_of_card"
-                android:text="@string/foundation_pile_zero"
+                android:text="@string/zero"
                 android:textStyle="bold" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/down_arrow"
+                android:elevation="-20dp"
+                android:tint="@color/grey"
+                android:rotation="180"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -244,8 +260,15 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:src="@drawable/back_of_card"
-                android:text="@string/foundation_pile_zero"
+                android:text="@string/zero"
                 android:textStyle="bold" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/down_arrow"
+                android:elevation="-20dp"
+                android:tint="@color/grey"
+                android:rotation="180"/>
         </RelativeLayout>
 
 </LinearLayout>

@@ -18,7 +18,10 @@
 
     <string name="foundation_pile_zero">0 UP</string>
     <string name="foundation_pile_hund">100 DOWN</string>
-    <string name="foundation_pile_down">DOWN</string>
+    <string name="zero">0</string>
+    <string name="hundred">100</string>
+    <string name="foundation_pile_down"> DOWN</string>
+    <string name="foundation_pile_up"> UP</string>
 
 
 

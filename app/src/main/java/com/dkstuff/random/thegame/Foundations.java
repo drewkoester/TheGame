@@ -43,9 +43,10 @@ public class Foundations {
     /**
      * Determine if a card being played is a legal move
      * @param cardPlayed the card which the user is attempting to play
+     * @param eval {boolean} if evaluating only do not set the value
      * @return true if the card played is legal and false if the play is illegal
      */
-    public boolean isValidPlay(Cards cardPlayed){
+    public boolean isValidPlay(Cards cardPlayed, boolean eval){
         boolean setValue = false;
         //ascending (1,2,3)
         if(increaseDirection){
@@ -72,7 +73,7 @@ public class Foundations {
             }
         }
 
-        if(setValue){
+        if(setValue && !eval){
             //update currentValue
             currentValue = cardPlayed.getValue();
             playedCards.add(cardPlayed);
