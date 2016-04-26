@@ -23,6 +23,9 @@
     <string name="foundation_pile_down"> DOWN</string>
     <string name="foundation_pile_up"> UP</string>
 
+    <string name="remaining_cards_label">Cards Left:</string>
+    <string name="turns_played_label">Turns Played:</string>
+
 
 
 </resources>
