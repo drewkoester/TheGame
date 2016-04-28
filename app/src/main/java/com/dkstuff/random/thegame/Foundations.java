@@ -48,6 +48,13 @@ public class Foundations {
      */
     public boolean isValidPlay(Cards cardPlayed, boolean eval){
         boolean setValue = false;
+
+        //todo: fix this since I don't like the try
+        try{
+            cardPlayed.getValue();
+        }catch(Exception e){
+            return false;
+        }
         //ascending (1,2,3)
         if(increaseDirection){
             if(cardPlayed.getValue() > currentValue){

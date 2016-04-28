@@ -22,11 +22,17 @@ public class SettingsActivity extends Activity {
         findViewById(R.id.ok_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(i);
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
     /**
@@ -57,6 +63,7 @@ public class SettingsActivity extends Activity {
 
     /**
      * Save the setting when a RadioButton is clicked
+     *
      * @param view the view which executed the click
      */
     public void onRadioButtonClicked(View view) {

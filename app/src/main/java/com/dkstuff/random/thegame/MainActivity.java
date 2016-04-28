@@ -76,14 +76,14 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                     //set to view
                     playersCards = player1.getPlayerCards();
                     setValuesToStock();
-
-                    //todo: fix why this no work
-                    //check that there are any valid plays left; if none left alert the player.
-                    if (!checkForValidPlay(player1)) {
-                        alertMessage();
-                    }
-
                 }
+
+                //check that there are any valid plays left; if none left alert the player.
+                if (!checkForValidPlay(player1)) {
+                    Log.d("TAG", "END THE GAME");
+                    alertMessage();
+                }
+
                 //increase turn count
                 increaseTurn();
             }
@@ -92,6 +92,12 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         initializeNewGame();
         //this starts the game
         startNewGame();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
     /**
@@ -316,14 +322,9 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                     if (movedCard != null) {
                         draggedImageView.setVisibility(View.VISIBLE);
                     }
-
                 }
 
                 return true;
-            // An unknown action type was received.
-            default:
-                Log.i(TAG, "Unknown action type received by OnDragListener.");
-                break;
         }
         return false;
     }
@@ -608,7 +609,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         // set dialog message
         alertDialogBuilder
                 .setMessage("Click yes to play again!" +
-                        "\nCards Played: " + remainingCards +
+                        "\nCards Played: " + (deckSize-remainingCards) +
                         "\nTurns Played: " + turnsPlayed +
                         "\nTime Played: " + returnTimePlayed())
                 .setCancelable(false)
@@ -622,8 +623,8 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Button (No) clicked: go to main screen and close
-                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                        startActivity(i);
+                        //Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        //startActivity(i);
                         dialog.cancel();
                     }
                 });
