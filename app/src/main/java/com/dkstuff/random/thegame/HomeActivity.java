@@ -17,7 +17,7 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
 
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
         setupAdStuff();
 
         /* Start Game. */
@@ -54,7 +54,7 @@ public class HomeActivity extends Activity {
     private void setupAdStuff(){
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("ca-app-pub-3940256099942544/1033173712")
+                .addTestDevice(getString(R.string.banner_ad_unit_id))
                 .build();
         mAdView.loadAd(adRequest);
     }

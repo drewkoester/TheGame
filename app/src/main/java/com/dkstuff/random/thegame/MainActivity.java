@@ -124,7 +124,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
 
             case 1:
                 Log.d(TAG, "Easy");
-                deckSize = 9; //48
+                deckSize = 49; //9
                 easyMode = true;
                 break;
         }
