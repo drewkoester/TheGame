@@ -43,6 +43,17 @@ public class HomeActivity extends Activity {
             }
         });
 
+        /* Rules. */
+        findViewById(R.id.rules_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent i = new Intent(getApplicationContext(),SettingsActivity.class);
+                //startActivity(i);
+                startActivity(new Intent(getApplicationContext(), RulesActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+            }
+        });
+
     }
 
     @Override

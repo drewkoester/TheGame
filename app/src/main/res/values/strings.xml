@@ -26,9 +26,43 @@
 
     <string name="remaining_cards_label">Cards Left:</string>
     <string name="turns_played_label">Turns Played:</string>
-    
+
     <integer name="google_play_services_version">8487000</integer>
 
+    <string name="rules_heading_basic">Basic Rules</string>
+    <string name="rules_basic">A cards value is written on the playing cards and can be discharged to one of four discharge piles.  Two of the piles represent an increasing value while the remaining two piles represent a decreasing value.  The increasing piles start with an initial value of zero (0) while the decreasing piles start with an initial value of one hundred (100).
+        \nFor the increasing piles, it is possible to play a value that is 10 less than the current value.  For the decreasing piles it is possible to play a value that is 10 greater than the current value.
+    </string>
+    <string name="rules_basic_example">Example\n
+       \nPile: 27 increasing
+       \nValid Cards: 17, 28, 36, etc.
+       \nInvalid Cards: 26, 13, 5.
+    </string>
+    <string name="rules_basic_final">The goal is to play all 98 cards into one of the four discharge piles.</string>
 
+    <string name="rules_heading_diff">Difficulty</string>
+    <string name="rules_diff">
+        Normal - rules as defined above
+        \nQuick - same rules as above except the player has to discharge cards from 1 to 49.
+        \nEasy - Player has to discharge cards from 1 to 49, but can play anything where the difference between the two values is divisible by 10.
+    </string>
+    <string name="rules_diff_example">
+        Example:\n
+           Pile 27 increasing\n
+           Valid Cards: 17, 7, 30, 32, etc.\n
+           Invalid Cards: 26, 13, 5
+    </string>
+    
+    <string name="rules_full">
+        Players in The Game try to discard all 98 cards in the deck onto four discard piles in order to win, but they need to do so in the right ways.
+        \n\nEach player starts with 8 cards in hand depending on the number of players, and four discard pile prompt cards are on the table: two showing "1" and an up arrow and two showing "100" and a down arrow. On a turn, a player must discard at least two cards from hand onto one or more discard piles, with cards on the 1 piles being placed in ascending order and cards on the 100 piles being placed in descending order. One tricky aspect to play is that you can play a card exactly 10 higher/lower than the top card of a discard pile even when you would normally have to play in a descending/ascending order, e.g., if a 100 discard pile is topped with an 87, you can play any card lower than 87 or you can play the 97.
+        \n\nAfter a player finishes their turn, they refill their hand from the deck.
+        \n\nOnce the deck is emptied, players are required only to play at least one card on a turn. If you play all 98 cards, you win! If you get good, the rules suggest that you play at least three cards a turn to increase the challenge.
+    </string>
 
+    <string-array name="minimum_discharge">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

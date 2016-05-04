@@ -87,6 +87,22 @@
                     android:onClick="onRadioButtonClicked" />
             </RadioGroup>
         </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Minimum Discharge"
+                android:padding="3dip" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"
+                android:layout_column="2"
+                android:entries="@array/minimum_discharge"
+                android:gravity="left"/>
+
+        </TableRow>
     </TableLayout>
 
     <Button

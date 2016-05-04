@@ -3,7 +3,6 @@ package com.dkstuff.random.thegame;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
@@ -46,6 +45,9 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
     private int turnsPlayed = 0;
     private int remainingCards = deckSize;
 
+    private int dischargeMinimum = 2;
+    private int currentDischarge = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,9 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         findViewById(R.id.hand_card_3).setOnLongClickListener(this);
         findViewById(R.id.hand_card_4).setOnLongClickListener(this);
         findViewById(R.id.hand_card_5).setOnLongClickListener(this);
+        findViewById(R.id.hand_card_6).setOnLongClickListener(this);
+        findViewById(R.id.hand_card_7).setOnLongClickListener(this);
+        findViewById(R.id.hand_card_8).setOnLongClickListener(this);
 
         //register drag event listeners for the target layout containers
         findViewById(R.id.stock_cards).setOnDragListener(this);
@@ -86,6 +91,12 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
 
                 //increase turn count
                 increaseTurn();
+
+                //increase the playerDischargeCount
+                currentDischarge = 0;
+                //check to enable endTurn
+                findViewById(R.id.end_turn_btn).setEnabled(false);
+
             }
         });
 
@@ -168,6 +179,21 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         localTextView = (TextView) findViewById(R.id.hand_card_5);
         localTextView.setText(String.valueOf(playersCards[4].getValue()));
         localTextView.setVisibility(View.VISIBLE);
+
+        //spot 6
+        localTextView = (TextView) findViewById(R.id.hand_card_6);
+        localTextView.setText(String.valueOf(playersCards[5].getValue()));
+        localTextView.setVisibility(View.VISIBLE);
+
+        //spot 7
+        localTextView = (TextView) findViewById(R.id.hand_card_7);
+        localTextView.setText(String.valueOf(playersCards[6].getValue()));
+        localTextView.setVisibility(View.VISIBLE);
+
+        //spot 8
+        localTextView = (TextView) findViewById(R.id.hand_card_8);
+        localTextView.setText(String.valueOf(playersCards[7].getValue()));
+        localTextView.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -229,6 +255,18 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         //spot 5
         else if (imageView.getId() == R.id.hand_card_5) {
             movedCard = playersCards[4];
+        }
+        //spot 5
+        else if (imageView.getId() == R.id.hand_card_6) {
+            movedCard = playersCards[5];
+        }
+        //spot 5
+        else if (imageView.getId() == R.id.hand_card_7) {
+            movedCard = playersCards[6];
+        }
+        //spot 5
+        else if (imageView.getId() == R.id.hand_card_8) {
+            movedCard = playersCards[7];
         }
 
         if (movedCard == null || movedCard.getValue() == 0) {
@@ -310,6 +348,13 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                         }
 
                         setRemainingCards();
+
+                        //increase the playerDischargeCount
+                        currentDischarge++;
+                        //check to enable endTurn
+                        if(currentDischarge >= dischargeMinimum){
+                            findViewById(R.id.end_turn_btn).setEnabled(true);
+                        }
                     }
                 }
 
@@ -467,6 +512,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         //reset last few things
         setRemainingCards();
         findViewById(R.id.end_turn_btn).performClick();
+        findViewById(R.id.end_turn_btn).setEnabled(false);
     }
 
     /**

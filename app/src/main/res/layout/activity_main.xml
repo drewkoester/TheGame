@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:screenOrientation="portrait">
+    android:screenOrientation="portrait"
+    android:weightSum="1">
 
     <RelativeLayout
         android:id="@+id/game_status"
@@ -16,110 +16,35 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/remaining_cards"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_marginRight="10dp"
                 android:elevation="100dp"
                 android:text="@string/remaining_cards"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_alignParentLeft="true"
                 android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/turns_played"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toLeftOf="@+id/remaining_cards"
                 android:layout_toRightOf="@id/remaining_cards"
                 android:elevation="100dp"
                 android:text="Turns Played: 1"
-                android:layout_alignParentRight="true"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/black"
-                android:layout_toLeftOf="@+id/remaining_cards" />
+                android:textColor="@color/black" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/stock_cards"
-            android:layout_width="match_parent"
-            android:layout_height="368dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:tag="stock_cards"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
 
-            <TextView
-                android:id="@+id/hand_card_1"
-                android:layout_width="@dimen/card_width"
-                android:layout_height="@dimen/card_height"
-                android:layout_margin="@dimen/playing_card_margin"
-                android:adjustViewBounds="true"
-                android:background="@drawable/layout_bg"
-                android:elevation="20dp"
-                android:gravity="center"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/hand_card_2"
-                android:layout_width="@dimen/card_width"
-                android:layout_height="@dimen/card_height"
-                android:layout_margin="@dimen/playing_card_margin"
-                android:layout_toRightOf="@+id/hand_card_1"
-                android:adjustViewBounds="true"
-                android:background="@drawable/layout_bg"
-                android:elevation="20dp"
-                android:gravity="center"
-                android:src="@drawable/tennis"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/hand_card_3"
-                android:layout_width="@dimen/card_width"
-                android:layout_height="@dimen/card_height"
-                android:layout_margin="@dimen/playing_card_margin"
-                android:layout_toRightOf="@+id/hand_card_2"
-                android:adjustViewBounds="true"
-                android:background="@drawable/layout_bg"
-                android:elevation="20dp"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:visibility="visible"/>
-
-            <TextView
-                android:id="@+id/hand_card_4"
-                android:layout_width="@dimen/card_width"
-                android:layout_height="@dimen/card_height"
-                android:layout_below="@id/hand_card_1"
-                android:layout_margin="@dimen/playing_card_margin"
-                android:adjustViewBounds="true"
-                android:background="@drawable/layout_bg"
-                android:elevation="20dp"
-                android:gravity="center"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/hand_card_5"
-                android:layout_width="@dimen/card_width"
-                android:layout_height="@dimen/card_height"
-                android:layout_below="@+id/hand_card_2"
-                android:layout_margin="@dimen/playing_card_margin"
-                android:layout_toRightOf="@+id/hand_card_4"
-                android:adjustViewBounds="true"
-                android:background="@drawable/layout_bg"
-                android:elevation="20dp"
-                android:gravity="center"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -146,17 +71,19 @@
             android:layout_height="@dimen/card_height"
             android:layout_margin="@dimen/playing_card_margin"
             android:background="@drawable/layout_pile_bg">
+
             <TextView
                 android:id="@+id/hundred_one_key"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center|top"
-                android:textAlignment="center"
-                android:textSize="8sp"
                 android:layout_margin="2dp"
+                android:gravity="center|top"
                 android:src="@drawable/back_of_card"
                 android:text="@string/foundation_pile_hund"
+                android:textAlignment="center"
+                android:textSize="8sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/hundred_one"
                 android:layout_width="match_parent"
@@ -165,12 +92,13 @@
                 android:src="@drawable/back_of_card"
                 android:text="@string/hundred"
                 android:textStyle="bold" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/down_arrow"
                 android:elevation="-20dp"
-                android:tint="@color/grey"/>
+                android:src="@drawable/down_arrow"
+                android:tint="@color/grey" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -179,17 +107,19 @@
             android:layout_height="@dimen/card_height"
             android:layout_margin="@dimen/playing_card_margin"
             android:background="@drawable/layout_pile_bg">
+
             <TextView
                 android:id="@+id/hundred_two_key"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center|top"
-                android:textAlignment="center"
-                android:textSize="8sp"
                 android:layout_margin="2dp"
+                android:gravity="center|top"
                 android:src="@drawable/back_of_card"
                 android:text="@string/foundation_pile_hund"
+                android:textAlignment="center"
+                android:textSize="8sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/hundred_two"
                 android:layout_width="match_parent"
@@ -198,12 +128,13 @@
                 android:src="@drawable/back_of_card"
                 android:text="@string/hundred"
                 android:textStyle="bold" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/down_arrow"
                 android:elevation="-20dp"
-                android:tint="@color/grey"/>
+                android:src="@drawable/down_arrow"
+                android:tint="@color/grey" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -212,17 +143,19 @@
             android:layout_height="@dimen/card_height"
             android:layout_margin="@dimen/playing_card_margin"
             android:background="@drawable/layout_pile_bg">
+
             <TextView
                 android:id="@+id/zero_one_key"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center|top"
-                android:textAlignment="center"
-                android:textSize="8sp"
                 android:layout_margin="2dp"
+                android:gravity="center|top"
                 android:src="@drawable/back_of_card"
                 android:text="@string/foundation_pile_zero"
+                android:textAlignment="center"
+                android:textSize="8sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/zero_one"
                 android:layout_width="match_parent"
@@ -231,13 +164,14 @@
                 android:src="@drawable/back_of_card"
                 android:text="@string/zero"
                 android:textStyle="bold" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/down_arrow"
                 android:elevation="-20dp"
-                android:tint="@color/grey"
-                android:rotation="180"/>
+                android:rotation="180"
+                android:src="@drawable/down_arrow"
+                android:tint="@color/grey" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -246,17 +180,19 @@
             android:layout_height="@dimen/card_height"
             android:layout_margin="@dimen/playing_card_margin"
             android:background="@drawable/layout_pile_bg">
+
             <TextView
                 android:id="@+id/zero_two_key"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center|top"
-                android:textAlignment="center"
-                android:textSize="8sp"
                 android:layout_margin="2dp"
+                android:gravity="center|top"
                 android:src="@drawable/back_of_card"
                 android:text="@string/foundation_pile_zero"
+                android:textAlignment="center"
+                android:textSize="8sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/zero_two"
                 android:layout_width="match_parent"
@@ -265,19 +201,158 @@
                 android:src="@drawable/back_of_card"
                 android:text="@string/zero"
                 android:textStyle="bold" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/down_arrow"
                 android:elevation="-20dp"
-                android:tint="@color/grey"
-                android:rotation="180"/>
+                android:rotation="180"
+                android:src="@drawable/down_arrow"
+                android:tint="@color/grey" />
         </RelativeLayout>
 
-</LinearLayout>
+    </LinearLayout>
 
-<!--Stock-->
 
+    <!--Stock-->
+    <TableLayout
+        android:id="@+id/stock_cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:tag="stock_cards"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp">
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/hand_card_1"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:adjustViewBounds="true"
+                android:background="@drawable/layout_bg"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:id="@+id/hand_card_2"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:adjustViewBounds="true"
+                android:background="@drawable/layout_bg"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:id="@+id/hand_card_3"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:adjustViewBounds="true"
+                android:background="@drawable/layout_bg"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:visibility="visible"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/hand_card_4"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:adjustViewBounds="true"
+                android:background="@drawable/layout_bg"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:id="@+id/hand_card_5"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:adjustViewBounds="true"
+                android:background="@drawable/layout_bg"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:id="@+id/hand_card_6"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:adjustViewBounds="true"
+                android:background="@drawable/layout_bg"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/hand_card_7"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:adjustViewBounds="true"
+                android:background="@drawable/layout_bg"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:id="@+id/hand_card_8"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:adjustViewBounds="true"
+                android:background="@drawable/layout_bg"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+        </TableRow>
+
+    </TableLayout>
 
     <!--Buttons for Stuff-->
     <LinearLayout
@@ -292,7 +367,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="end turn" />
+            android:text="end turn"
+            android:enabled="false"/>
 
         <!--<Button-->
         <!--android:id="@+id/setCard_bt"-->

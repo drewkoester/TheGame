@@ -5,7 +5,7 @@ import android.util.Log;
  * Created by dk8704 on 4/14/16.
  */
 public class Player {
-    private static final int MAX_CARDS = 5;
+    private static final int MAX_CARDS = 8;
     UUID idOne = UUID.randomUUID();
     Cards[] handCards = new Cards[MAX_CARDS];
 
