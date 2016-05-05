@@ -60,6 +60,12 @@
         \n\nOnce the deck is emptied, players are required only to play at least one card on a turn. If you play all 98 cards, you win! If you get good, the rules suggest that you play at least three cards a turn to increase the challenge.
     </string>
 
+    <string name="rule_full_2">
+        The goal in The Game is to try to discard all cards within the deck to one of four discard piles.  Two of the discard piles show "0" and an up direction and the other two show "100" and  a down direction.
+        \n\nThe player starts with 8 cards in their hand and must discard at least two cards from their hand on every turn.  The play may discharge onto any of the four discard piles, with cards on the "0" pile being placed in ascending order and cards on the "100" piles being placed in descending order.  The discard piles have one other piece of logic which allows them to accept a card who has a value that is a difference of 10 from the current value.  For example on the "100" discard pile with a value of 63; the player can play anything less than 63 or a value of 73 (increase of 10).
+        \n\nIf the game becomes too easy change the setting of the game to increase the difficulty.
+    </string>
+
     <string-array name="minimum_discharge">
         <item>1</item>
         <item>2</item>
