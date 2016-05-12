@@ -20,33 +20,38 @@ import java.util.Random;
 public class MainActivity extends Activity implements OnDragListener, View.OnLongClickListener {
 
     private static final String TAG = "theGameActivity";
-    public static final String PREFS_NAME = "theGamePrefs";
+    private static final String PREFS_NAME = "theGamePrefs";
 
-    //card deck
-    public int deckSize = 98;
-    public int deckPosition = 0;
-    public boolean easyMode = false;
-    private Cards[] cards = new Cards[deckSize];
-    private boolean cardsCreated = false;
-    public Cards movedCard;
-    public Cards[] playersCards;
-    private int movingId;
+    //player
+    public static Player player1 = new Player();
 
-    private Player player1 = new Player();
-    private Foundations onehundred_one = new Foundations();
-    private Foundations onehundred_two = new Foundations();
-    private Foundations zero_one = new Foundations();
-    private Foundations zero_two = new Foundations();
+    //game settings
+    public static int deckSize = 98;
+    public static int deckPosition = 0;
+    public static boolean easyMode = false;
+
+    //cards
+    public static Cards[] cards = new Cards[deckSize];
+    public static boolean cardsCreated = false;
+    public static Cards movedCard;
+    public static Cards[] playersCards;
+    public static int movingId;
+
+
+    public static Foundations onehundred_one = new Foundations();
+    public static Foundations onehundred_two = new Foundations();
+    public static Foundations zero_one = new Foundations();
+    public static Foundations zero_two = new Foundations();
 
     //timer for how long you have played
-    public long startTime = 0L;
-    long timeInMilliseconds = 0L;
+    public static long startTime = 0L;
+    public static long timeInMilliseconds = 0L;
 
-    private int turnsPlayed = 0;
-    private int remainingCards = deckSize;
+    private static int turnsPlayed = 0;
+    public static int remainingCards = deckSize;
 
-    private int dischargeMinimum = 2;
-    private int currentDischarge = 0;
+    private static int dischargeMinimum = 2;
+    private static int currentDischarge = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,36 +78,42 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         findViewById(R.id.end_turn_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check hand size
-                while (player1.getEmptySlots() > 0 && (deckSize != deckPosition)) {
-                    //draw card
-                    drawCard(player1);
-
-                    //set to view
-                    playersCards = player1.getPlayerCards();
-                    setValuesToStock();
-                }
-
-                //check that there are any valid plays left; if none left alert the player.
-                if (!checkForValidPlay(player1)) {
-                    Log.d("TAG", "END THE GAME");
-                    alertMessage();
-                }
-
-                //increase turn count
-                increaseTurn();
-
-                //increase the playerDischargeCount
-                currentDischarge = 0;
-                //check to enable endTurn
-                findViewById(R.id.end_turn_btn).setEnabled(false);
-
+                endTurn();
             }
         });
 
         initializeNewGame();
         //this starts the game
         startNewGame();
+    }
+
+    /**
+     * Function that contains the logic to end a players turn
+     */
+    public void endTurn(){
+        //check hand size
+        while (player1.getEmptySlots() > 0 && (deckSize != deckPosition)) {
+            //draw card
+            drawCard(player1);
+
+            //set to view
+            playersCards = player1.getPlayerCards();
+            setValuesToStock();
+        }
+
+        //check that there are any valid plays left; if none left alert the player.
+        if (!checkForValidPlay(player1)) {
+            Log.d("TAG", "END THE GAME");
+            alertMessage();
+        }
+
+        //increase turn count
+        increaseTurn();
+
+        //increase the playerDischargeCount
+        currentDischarge = 0;
+        //check to enable endTurn
+        findViewById(R.id.end_turn_btn).setEnabled(false);
     }
 
     @Override
@@ -155,45 +166,85 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      * Takes the player's cards and sets the visible displays
      */
     private void setValuesToStock() {
-        //spot 1
-        TextView localTextView = (TextView) findViewById(R.id.hand_card_1);
-        localTextView.setText(String.valueOf(playersCards[0].getValue()));
-        localTextView.setVisibility(View.VISIBLE);
+        //Look through the player's 8 cards
+        for(int i = 0; i < 8; i++){
+            int textId = 0;
+            switch (i) {
+                case 0:
+                    textId = R.id.hand_card_1;
+                    break;
+                case 1:
+                    textId = R.id.hand_card_2;
+                    break;
+                case 2:
+                    textId = R.id.hand_card_3;
+                    break;
+                case 3:
+                    textId = R.id.hand_card_4;
+                    break;
+                case 4:
+                    textId = R.id.hand_card_5;
+                    break;
+                case 5:
+                    textId = R.id.hand_card_6;
+                    break;
+                case 6:
+                    textId = R.id.hand_card_7;
+                    break;
+                case 7:
+                    textId = R.id.hand_card_8;
+                    break;
+            }
+            //get a TextView to update
+            TextView localTextView = (TextView) findViewById(textId);
+            //if the card exists populate the value otherwise make the card invisible
+            if(playersCards[i] != null){
+                localTextView.setText(String.valueOf(playersCards[i].getValue()));
+                localTextView.setVisibility(View.VISIBLE);
+            }else{
+                localTextView.setVisibility(View.INVISIBLE);
+            }
+        }
 
-        //spot 2
-        localTextView = (TextView) findViewById(R.id.hand_card_2);
-        localTextView.setText(String.valueOf(playersCards[1].getValue()));
-        localTextView.setVisibility(View.VISIBLE);
-
-        //spot 3
-        localTextView = (TextView) findViewById(R.id.hand_card_3);
-        localTextView.setText(String.valueOf(playersCards[2].getValue()));
-        localTextView.setVisibility(View.VISIBLE);
-
-        //spot 4
-        localTextView = (TextView) findViewById(R.id.hand_card_4);
-        localTextView.setText(String.valueOf(playersCards[3].getValue()));
-        localTextView.setVisibility(View.VISIBLE);
-
-        //spot 5
-        localTextView = (TextView) findViewById(R.id.hand_card_5);
-        localTextView.setText(String.valueOf(playersCards[4].getValue()));
-        localTextView.setVisibility(View.VISIBLE);
-
-        //spot 6
-        localTextView = (TextView) findViewById(R.id.hand_card_6);
-        localTextView.setText(String.valueOf(playersCards[5].getValue()));
-        localTextView.setVisibility(View.VISIBLE);
-
-        //spot 7
-        localTextView = (TextView) findViewById(R.id.hand_card_7);
-        localTextView.setText(String.valueOf(playersCards[6].getValue()));
-        localTextView.setVisibility(View.VISIBLE);
-
-        //spot 8
-        localTextView = (TextView) findViewById(R.id.hand_card_8);
-        localTextView.setText(String.valueOf(playersCards[7].getValue()));
-        localTextView.setVisibility(View.VISIBLE);
+//        //spot 1
+//        TextView localTextView = (TextView) findViewById(R.id.hand_card_1);
+//        localTextView.setText(String.valueOf(playersCards[0].getValue()));
+//        localTextView.setVisibility(View.VISIBLE);
+//
+//        //spot 2
+//        localTextView = (TextView) findViewById(R.id.hand_card_2);
+//        localTextView.setText(String.valueOf(playersCards[1].getValue()));
+//        localTextView.setVisibility(View.VISIBLE);
+//
+//        //spot 3
+//        localTextView = (TextView) findViewById(R.id.hand_card_3);
+//        localTextView.setText(String.valueOf(playersCards[2].getValue()));
+//        localTextView.setVisibility(View.VISIBLE);
+//
+//        //spot 4
+//        localTextView = (TextView) findViewById(R.id.hand_card_4);
+//        localTextView.setText(String.valueOf(playersCards[3].getValue()));
+//        localTextView.setVisibility(View.VISIBLE);
+//
+//        //spot 5
+//        localTextView = (TextView) findViewById(R.id.hand_card_5);
+//        localTextView.setText(String.valueOf(playersCards[4].getValue()));
+//        localTextView.setVisibility(View.VISIBLE);
+//
+//        //spot 6
+//        localTextView = (TextView) findViewById(R.id.hand_card_6);
+//        localTextView.setText(String.valueOf(playersCards[5].getValue()));
+//        localTextView.setVisibility(View.VISIBLE);
+//
+//        //spot 7
+//        localTextView = (TextView) findViewById(R.id.hand_card_7);
+//        localTextView.setText(String.valueOf(playersCards[6].getValue()));
+//        localTextView.setVisibility(View.VISIBLE);
+//
+//        //spot 8
+//        localTextView = (TextView) findViewById(R.id.hand_card_8);
+//        localTextView.setText(String.valueOf(playersCards[7].getValue()));
+//        localTextView.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -430,7 +481,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      *
      * @param player the player who is going to draw cards
      */
-    public void drawCard(Player player) {
+    public static void drawCard(Player player) {
         Cards drawCard = null;
         boolean found = false;
 
@@ -623,21 +674,24 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      *
      * @return a value of true indicates a valid play exists for the player.
      */
-    public boolean checkForValidPlay(Player p) {
+    public static boolean checkForValidPlay(Player p) {
         boolean validPlayExists = false;
 
         for (Cards c : p.getPlayerCards()) {
-            if (onehundred_one.isValidPlay(c, true)) {
-                validPlayExists = true;
-            }
-            if (onehundred_two.isValidPlay(c, true)) {
-                validPlayExists = true;
-            }
-            if (zero_one.isValidPlay(c, true)) {
-                validPlayExists = true;
-            }
-            if (zero_two.isValidPlay(c, true)) {
-                validPlayExists = true;
+            //an empty spot is set to null
+            if(c != null){
+                if (onehundred_one.isValidPlay(c, true)) {
+                    validPlayExists = true;
+                }
+                if (onehundred_two.isValidPlay(c, true)) {
+                    validPlayExists = true;
+                }
+                if (zero_one.isValidPlay(c, true)) {
+                    validPlayExists = true;
+                }
+                if (zero_two.isValidPlay(c, true)) {
+                    validPlayExists = true;
+                }
             }
         }
         return validPlayExists;
@@ -687,7 +741,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      *
      * @return message containing the amount of time
      */
-    public String returnTimePlayed() {
+    public static String returnTimePlayed() {
         String message = "";
         timeInMilliseconds = System.currentTimeMillis() - startTime;
 

@@ -35,6 +35,15 @@ public class Player {
     }
 
     public Cards[] getPlayerCards(){
+        int size = MAX_CARDS-getEmptySlots();
+        Cards[] tempCards = new Cards[size];
+        for(Cards c: handCards){
+            if(c != null){
+                tempCards[size-1] = c;
+                size = size - 1;
+            }
+        }
+
         return handCards;
     }
 

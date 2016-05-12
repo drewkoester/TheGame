@@ -108,4 +108,8 @@ public class Foundations {
         playedCards.removeAll(playedCards);
     }
 
+    public void test_setValue(int cardValue){
+        currentValue = cardValue;
+    }
+
 }
