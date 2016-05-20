@@ -23,34 +23,34 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
     private static final String PREFS_NAME = "theGamePrefs";
 
     //player
-    public static Player player1 = new Player();
+    public final static Player player1 = new Player();
 
     //game settings
     public static int deckSize = 98;
     public static int deckPosition = 0;
-    public static boolean easyMode = false;
+    private static boolean easyMode = false;
 
     //cards
     public static Cards[] cards = new Cards[deckSize];
-    public static boolean cardsCreated = false;
-    public static Cards movedCard;
-    public static Cards[] playersCards;
-    public static int movingId;
+    private static boolean cardsCreated = false;
+    private static Cards movedCard;
+    private static Cards[] playersCards;
+    private static int movingId;
 
 
-    public static Foundations onehundred_one = new Foundations();
-    public static Foundations onehundred_two = new Foundations();
-    public static Foundations zero_one = new Foundations();
-    public static Foundations zero_two = new Foundations();
+    public final static Foundations onehundred_one = new Foundations();
+    public final static Foundations onehundred_two = new Foundations();
+    public final static Foundations zero_one = new Foundations();
+    public final static Foundations zero_two = new Foundations();
 
     //timer for how long you have played
     public static long startTime = 0L;
-    public static long timeInMilliseconds = 0L;
+    private static long timeInMilliseconds = 0L;
 
     private static int turnsPlayed = 0;
     public static int remainingCards = deckSize;
 
-    private static int dischargeMinimum = 2;
+    private final static int dischargeMinimum = 2;
     private static int currentDischarge = 0;
 
     @Override
@@ -636,11 +636,8 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         //Log.d(TAG, "Spot: " + x21 + " " + y21 + " " + x22 + " " + y22);
 
         //math stuff
-        if ((x21 <= x) && (x <= x22) && (y21 <= y) && (y <= y22)) {
-            return true;
-        }
+        return (x21 <= x) && (x <= x22) && (y21 <= y) && (y <= y22);
 
-        return false;
     }
 
 
@@ -742,7 +739,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      * @return message containing the amount of time
      */
     public static String returnTimePlayed() {
-        String message = "";
+        String message;
         timeInMilliseconds = System.currentTimeMillis() - startTime;
 
         int secs = (int) (timeInMilliseconds / 1000);

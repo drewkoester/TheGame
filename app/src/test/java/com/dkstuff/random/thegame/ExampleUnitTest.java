@@ -5,28 +5,13 @@ import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 import android.content.Context;
-import android.util.Log;
+
 import org.junit.Before;
-import android.view.DragEvent;
-import android.view.View;
-import android.view.View.OnDragListener;
-import android.widget.TextView;
-import android.view.Menu;
-import android.view.MenuItem;
 //import android.support.test.runner.AndroidJUnit4;
 //import android.support.test.runner.AndroidJUnitRunner;
-import android.test.ActivityInstrumentationTestCase2;
-import com.dkstuff.random.thegame.MainActivity;
-import com.dkstuff.random.thegame.R;
 //import android.support.test.runner.AndroidJUnit4;
-import android.test.ActivityInstrumentationTestCase2;
-import android.test.suitebuilder.annotation.LargeTest;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.dkstuff.random.thegame.MainActivity;
-import com.dkstuff.random.thegame.R;
-
 
 
 import static org.junit.Assert.*;
@@ -47,7 +32,7 @@ public class ExampleUnitTest {
         //myObjectUnderTest.startNewGame();
 
         //ensure that all cards are within the DECK
-        for(Cards c: myObjectUnderTest.cards){
+        for(Cards c: MainActivity.cards){
             assertEquals("DECK", c.getLocation());
             assertNotEquals(0, c.getValue());
             assertNotEquals(100, c.getValue());
@@ -56,15 +41,15 @@ public class ExampleUnitTest {
 
     @Test
     public void testValidateReturnTimePlayed() throws Exception {
-        myObjectUnderTest.startTime = System.currentTimeMillis();
-        assertEquals(myObjectUnderTest.returnTimePlayed(), "0:00");
+        MainActivity.startTime = System.currentTimeMillis();
+        assertEquals(MainActivity.returnTimePlayed(), "0:00");
 
         try {
             Thread.sleep(1000);                 //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        assertEquals("0:01", myObjectUnderTest.returnTimePlayed());
+        assertEquals("0:01", MainActivity.returnTimePlayed());
     }
 
 //    @Test

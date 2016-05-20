@@ -1,18 +1,11 @@
 package com.dkstuff.random.thegame;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
-
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 //import com.example.android.activityinstrumentation.MainActivity;
 //import com.example.android.activityinstrumentation.R;
 import com.dkstuff.random.thegame.MainActivity;
-import com.dkstuff.random.thegame.R;
-
-import android.util.Log;
-import android.widget.Button;
 
 
 /**
@@ -120,7 +113,7 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<MainActivi
                     MainActivity.remainingCards = MainActivity.remainingCards - 1;
                     MainActivity.deckPosition++;
                 }
-                //put the cards into a standard order (i.e. unshuffle the deck)
+                //put the cards into a standard order (i.e. un-shuffle the deck)
                 c.setValue(1 + c.getPosition());
             }
         }

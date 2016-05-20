@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
     android:weightSum="1">
 
+
     <RelativeLayout
-        android:id="@+id/game_status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="top"
@@ -24,8 +25,8 @@
                 android:id="@+id/remaining_cards"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginRight="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="10dp"
                 android:elevation="100dp"
                 android:text="@string/remaining_cards"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -35,9 +36,9 @@
                 android:id="@+id/turns_played"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_toLeftOf="@+id/remaining_cards"
-                android:layout_toRightOf="@id/remaining_cards"
+                android:layout_alignParentEnd="true"
+                android:layout_toStartOf="@+id/remaining_cards"
+                android:layout_toEndOf="@id/remaining_cards"
                 android:elevation="100dp"
                 android:text="Turns Played: 1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -82,7 +83,8 @@
                 android:text="@string/foundation_pile_hund"
                 android:textAlignment="center"
                 android:textSize="8sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/hundred_one"
@@ -145,7 +147,6 @@
             android:background="@drawable/layout_pile_bg">
 
             <TextView
-                android:id="@+id/zero_one_key"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
@@ -182,7 +183,6 @@
             android:background="@drawable/layout_pile_bg">
 
             <TextView
-                android:id="@+id/zero_two_key"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
@@ -229,7 +229,6 @@
         android:layout_marginRight="20dp">
 
         <TableRow
-            android:id="@+id/tableRow1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -277,7 +276,6 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -320,7 +318,6 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -359,15 +356,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_margin="16dp"
-        android:layout_weight="3.36">
+        android:layout_margin="16dp">
 
         <Button
             android:id="@+id/end_turn_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="end turn"
+            android:text="@string/label_end_turn"
             android:enabled="false"/>
 
         <!--<Button-->
@@ -383,6 +379,6 @@
         <!--android:layout_weight="0.5"-->
         <!--android:text="new game"/>-->
     </LinearLayout>
-</FrameLayout>
+</merge>
 
 

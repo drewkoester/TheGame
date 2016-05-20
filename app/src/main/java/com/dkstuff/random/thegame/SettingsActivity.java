@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.content.SharedPreferences;
-import android.content.Context;
 import android.widget.RadioButton;
 import android.view.View;
 
 public class SettingsActivity extends Activity {
-    public static final String PREFS_NAME = "theGamePrefs";
+    private static final String PREFS_NAME = "theGamePrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +105,6 @@ public class SettingsActivity extends Activity {
         editor.putBoolean("displayAd", displayAds);
 
         // Commit the edits!
-        editor.commit();
+        editor.apply();
     }
 }

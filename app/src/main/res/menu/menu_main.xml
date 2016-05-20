@@ -5,12 +5,12 @@
     <item
         android:id="@+id/action_new_game"
         android:orderInCategory="200"
-        android:title="New Game"
+        android:title="@string/btn_start"
         app:showAsAction="ifRoom"
         ></item>
     <item
         android:id="@+id/action_rules"
         android:orderInCategory="300"
-        android:title="Rules"
+        android:title="@string/btn_rules"
         app:showAsAction="ifRoom"></item>
 </menu>

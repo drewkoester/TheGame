@@ -1,7 +1,11 @@
 package com.dkstuff.random.thegame;
 
 /**
- * Created by dk8704 on 4/13/16.
+ * constructor Cards
+ * This is the basic playing cards that contains the values necessary for it
+ * value: The value {int} of the card.
+ * location: Where the card is currently location
+ * position: The spot {int} that the card is within the deck (this handles the shuffle)
  */
 public class Cards {
     private int value;
@@ -10,11 +14,6 @@ public class Cards {
 
     public void setValue(int value){
         this.value = value;
-    }
-
-    public void setCard(String location, int position){
-        this.location = location;
-        this.position = position;
     }
 
     public void setLocation(String location){

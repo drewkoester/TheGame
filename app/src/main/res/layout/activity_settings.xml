@@ -25,13 +25,13 @@
         <TableRow>
             <TextView
                 android:layout_column="1"
-                android:text="Game Difficulty"
+                android:text="@string/rules_label_difficulty"
                 android:padding="3dip" />
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="left">
+                android:gravity="start">
 
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -62,18 +62,18 @@
         <TableRow>
             <TextView
                 android:layout_column="1"
-                android:text="Display Ad (home screen only)"
+                android:text="@string/rules_label_display_ad"
                 android:padding="3dip" />
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="left">
+                android:gravity="start">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yes"
+                    android:text="@string/label_yes"
                     android:id="@+id/ad_yes"
                     android:checked="true"
                     android:onClick="onRadioButtonClicked" />
@@ -81,7 +81,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No"
+                    android:text="@string/label_no"
                     android:id="@+id/ad_no"
                     android:checked="false"
                     android:onClick="onRadioButtonClicked" />
@@ -91,16 +91,15 @@
         <TableRow>
             <TextView
                 android:layout_column="1"
-                android:text="Minimum Discharge"
+                android:text="@string/rules_label_min_discharge"
                 android:padding="3dip" />
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner"
                 android:layout_column="2"
                 android:entries="@array/minimum_discharge"
-                android:gravity="left"/>
+                android:gravity="start"/>
 
         </TableRow>
     </TableLayout>
@@ -108,9 +107,10 @@
     <Button
         android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
-        android:text="OK"
+        android:text="@string/label_ok"
         android:id="@+id/ok_btn"
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>
