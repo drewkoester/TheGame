@@ -1,7 +1,5 @@
 package com.dkstuff.random.thegame;
 
-import java.util.ArrayList;
-
 /**
  * class Foundations
  * These are the spots that the player places their cards on.  They contain the logic necessary
@@ -14,7 +12,7 @@ public class Foundations {
     private int id = 0;
     private boolean easyMode = false;
 
-    private final ArrayList<Cards> playedCards = new ArrayList<>();
+    //private final ArrayList<Cards> playedCards = new ArrayList<>();
 
     public void setId(int id){
         this.id = id;
@@ -79,7 +77,7 @@ public class Foundations {
         if(setValue && !eval){
             //update currentValue
             currentValue = cardPlayed.getValue();
-            playedCards.add(cardPlayed);
+            //playedCards.add(cardPlayed);
         }
 
         return setValue;
@@ -90,7 +88,7 @@ public class Foundations {
         this.currentValue = cardPlayed.getValue();
 
         //Add to ArrayList
-        playedCards.add(cardPlayed);
+        //playedCards.add(cardPlayed);
     }
 
     /**
@@ -99,7 +97,7 @@ public class Foundations {
     public void resetGame(){
         currentValue = startingPosition;
         //playedCards.removeAll(playedCards);
-        playedCards.clear();
+        //playedCards.clear();
     }
 
     public void test_setValue(int cardValue){
