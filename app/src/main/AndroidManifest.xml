@@ -44,7 +44,7 @@
             android:name=".SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
-        <activity android:name=".RulesActivity"></activity>
+        <activity android:name=".RulesActivity"/>
     </application>
 
 </manifest>

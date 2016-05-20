@@ -40,7 +40,7 @@
                 android:layout_toStartOf="@+id/remaining_cards"
                 android:layout_toEndOf="@id/remaining_cards"
                 android:elevation="100dp"
-                android:text="Turns Played: 1"
+                android:text="@string/turns_played_label"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/black" />
         </RelativeLayout>
@@ -100,7 +100,8 @@
                 android:layout_height="match_parent"
                 android:elevation="-20dp"
                 android:src="@drawable/down_arrow"
-                android:tint="@color/grey" />
+                android:tint="@color/grey"
+                android:contentDescription="@string/cont_desc_down_arrow" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -136,7 +137,8 @@
                 android:layout_height="match_parent"
                 android:elevation="-20dp"
                 android:src="@drawable/down_arrow"
-                android:tint="@color/grey" />
+                android:tint="@color/grey"
+                android:contentDescription="@string/cont_desc_down_arrow" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -172,7 +174,8 @@
                 android:elevation="-20dp"
                 android:rotation="180"
                 android:src="@drawable/down_arrow"
-                android:tint="@color/grey" />
+                android:tint="@color/grey"
+                android:contentDescription="@string/cont_desc_up_arrow" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -208,7 +211,8 @@
                 android:elevation="-20dp"
                 android:rotation="180"
                 android:src="@drawable/down_arrow"
-                android:tint="@color/grey" />
+                android:tint="@color/grey"
+                android:contentDescription="@string/cont_desc_up_arrow" />
         </RelativeLayout>
 
     </LinearLayout>

@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/title"/>
+        android:src="@drawable/title"
+        android:contentDescription="@string/cont_desc_app_name" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -36,7 +37,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Normal Mode"
+                    android:text="@string/setting_difficult_normal"
                     android:id="@+id/mode_normal"
                     android:checked="true"
                     android:onClick="onRadioButtonClicked" />
@@ -44,7 +45,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quick Mode"
+                    android:text="@string/setting_difficult_quick"
                     android:id="@+id/mode_quick"
                     android:checked="false"
                     android:onClick="onRadioButtonClicked" />
@@ -52,7 +53,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Easy Mode"
+                    android:text="@string/setting_difficult_easy"
                     android:id="@+id/mode_easy"
                     android:checked="false"
                     android:onClick="onRadioButtonClicked" />

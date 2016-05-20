@@ -47,4 +47,11 @@
     <string name="label_yes">Yes</string>
     <string name="label_no">No</string>
 
+    <string name="cont_desc_app_name">Application Name</string>
+    <string name="cont_desc_down_arrow">Down Arrow</string>
+    <string name="cont_desc_up_arrow">Up Arrow</string>
+
+    <string name="setting_difficult_normal">Normal Mode</string>
+    <string name="setting_difficult_quick">Quick Mode</string>
+    <string name="setting_difficult_easy">Easy Mode</string>
 </resources>

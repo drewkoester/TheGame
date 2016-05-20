@@ -45,7 +45,6 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
 
     //timer for how long you have played
     public static long startTime = 0L;
-    private static long timeInMilliseconds = 0L;
 
     private static int turnsPlayed = 0;
     public static int remainingCards = deckSize;
@@ -90,7 +89,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
     /**
      * Function that contains the logic to end a players turn
      */
-    public void endTurn(){
+    public void endTurn() {
         //check hand size
         while (player1.getEmptySlots() > 0 && (deckSize != deckPosition)) {
             //draw card
@@ -167,7 +166,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      */
     private void setValuesToStock() {
         //Look through the player's 8 cards
-        for(int i = 0; i < 8; i++){
+        for (int i = 0; i < 8; i++) {
             int textId = 0;
             switch (i) {
                 case 0:
@@ -198,10 +197,10 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
             //get a TextView to update
             TextView localTextView = (TextView) findViewById(textId);
             //if the card exists populate the value otherwise make the card invisible
-            if(playersCards[i] != null){
+            if (playersCards[i] != null) {
                 localTextView.setText(String.valueOf(playersCards[i].getValue()));
                 localTextView.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 localTextView.setVisibility(View.INVISIBLE);
             }
         }
@@ -251,7 +250,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      * Menu Options
      *
      * @param item MenuItem selected
-     * @return
+     * @return True for a valid selection, False indicates a problem
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -284,7 +283,6 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
     //executed when a card is clicked
     @Override
     public boolean onLongClick(View imageView) {
-        //todo: get the actual Card object being moved - use the imageView.getId to get the card and associate it to the image - magic
         //Log.d(TAG, ""+imageView.getId());
         movingId = imageView.getId();
         //spot 1
@@ -325,7 +323,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         }
         //Log.d(TAG, "Moving Card Value: " + movedCard.getValue());
 
-        //create clip data holding data of the type MIMETYPE_TEXT_PLAIN
+        //create clip data holding data of the type
         ClipData clipData = ClipData.newPlainText("", "");
 
         View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(imageView);
@@ -403,7 +401,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                         //increase the playerDischargeCount
                         currentDischarge++;
                         //check to enable endTurn
-                        if(currentDischarge >= dischargeMinimum){
+                        if (currentDischarge >= dischargeMinimum) {
                             findViewById(R.id.end_turn_btn).setEnabled(true);
                         }
                     }
@@ -676,7 +674,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
 
         for (Cards c : p.getPlayerCards()) {
             //an empty spot is set to null
-            if(c != null){
+            if (c != null) {
                 if (onehundred_one.isValidPlay(c, true)) {
                     validPlayExists = true;
                 }
@@ -706,7 +704,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         // set dialog message
         alertDialogBuilder
                 .setMessage("Click yes to play again!" +
-                        "\nCards Played: " + (deckSize-remainingCards) +
+                        "\nCards Played: " + (deckSize - remainingCards) +
                         "\nTurns Played: " + turnsPlayed +
                         "\nTime Played: " + returnTimePlayed())
                 .setCancelable(false)
@@ -740,13 +738,13 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
      */
     public static String returnTimePlayed() {
         String message;
-        timeInMilliseconds = System.currentTimeMillis() - startTime;
+        long timeInMilliseconds = System.currentTimeMillis() - startTime;
 
         int secs = (int) (timeInMilliseconds / 1000);
-        int mins = secs / 60;
+        int minutes = secs / 60;
         secs = secs % 60;
 
-        message = "" + mins + ":" + String.format("%02d", secs);
+        message = "" + minutes + ":" + String.format("%02d", secs);
 
         return message;
     }

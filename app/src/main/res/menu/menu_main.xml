@@ -1,16 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MyActivity" >
+    tools:context=".MyActivity">
     <item
         android:id="@+id/action_new_game"
         android:orderInCategory="200"
         android:title="@string/btn_start"
-        app:showAsAction="ifRoom"
-        ></item>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_rules"
         android:orderInCategory="300"
         android:title="@string/btn_rules"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="ifRoom" />
 </menu>

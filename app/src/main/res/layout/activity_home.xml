@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/title"/>
+            android:src="@drawable/title"
+            android:contentDescription="@string/cont_desc_app_name" />
 
         <Button
             android:layout_width="@dimen/button_width"

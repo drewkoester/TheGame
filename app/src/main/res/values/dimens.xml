@@ -5,7 +5,7 @@
 
     <dimen name="playing_card_margin">15dp</dimen>
 
-    <!--card dimenstion (2.5x3.5 [wxh])-->
+    <!--card dimension (2.5x3.5 [wxh])-->
     <dimen name="card_width">62dp</dimen>
     <dimen name="card_height">92dp</dimen>
 
