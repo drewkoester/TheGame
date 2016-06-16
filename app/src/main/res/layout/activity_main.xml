@@ -42,7 +42,8 @@
                 android:elevation="100dp"
                 android:text="@string/turns_played_label"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textAlignment="textEnd" />
         </RelativeLayout>
 
 
@@ -93,6 +94,7 @@
                 android:gravity="center"
                 android:src="@drawable/back_of_card"
                 android:text="@string/hundred"
+                android:textSize="@dimen/card_value_text_size"
                 android:textStyle="bold" />
 
             <ImageView
@@ -130,6 +132,7 @@
                 android:gravity="center"
                 android:src="@drawable/back_of_card"
                 android:text="@string/hundred"
+                android:textSize="@dimen/card_value_text_size"
                 android:textStyle="bold" />
 
             <ImageView
@@ -166,6 +169,7 @@
                 android:gravity="center"
                 android:src="@drawable/back_of_card"
                 android:text="@string/zero"
+                android:textSize="@dimen/card_value_text_size"
                 android:textStyle="bold" />
 
             <ImageView
@@ -203,6 +207,7 @@
                 android:gravity="center"
                 android:src="@drawable/back_of_card"
                 android:text="@string/zero"
+                android:textSize="@dimen/card_value_text_size"
                 android:textStyle="bold" />
 
             <ImageView
@@ -227,7 +232,7 @@
         android:orientation="horizontal"
         android:tag="stock_cards"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp">
@@ -251,6 +256,7 @@
                 android:background="@drawable/layout_bg"
                 android:elevation="20dp"
                 android:gravity="center"
+                android:textSize="@dimen/card_value_text_size"
                 android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
@@ -263,6 +269,7 @@
                 android:elevation="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:textSize="@dimen/card_value_text_size"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -274,6 +281,7 @@
                 android:elevation="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:textSize="@dimen/card_value_text_size"
                 android:visibility="visible"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
@@ -295,6 +303,7 @@
                 android:elevation="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:textSize="@dimen/card_value_text_size"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -306,6 +315,7 @@
                 android:elevation="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:textSize="@dimen/card_value_text_size"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -317,6 +327,7 @@
                 android:elevation="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:textSize="@dimen/card_value_text_size"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
         </TableRow>
@@ -338,6 +349,7 @@
                 android:elevation="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:textSize="@dimen/card_value_text_size"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -349,6 +361,7 @@
                 android:elevation="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:textSize="@dimen/card_value_text_size"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
         </TableRow>
@@ -369,19 +382,6 @@
             android:layout_weight="0.5"
             android:text="@string/label_end_turn"
             android:enabled="false"/>
-
-        <!--<Button-->
-        <!--android:id="@+id/setCard_bt"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="0.5"-->
-        <!--android:text="set card"/>-->
-        <!--<Button-->
-        <!--android:id="@+id/new_game_bt"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="0.5"-->
-        <!--android:text="new game"/>-->
     </LinearLayout>
 </merge>
 
