@@ -7,4 +7,6 @@
     <color name="background_skull_tint">#6adfdcdc</color>
 
     <color name="button_background">#d5d9da</color>
+
+    <color name="radio_button">#646666</color>
 </resources>
