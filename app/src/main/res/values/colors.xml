@@ -4,5 +4,6 @@
     <color name="grey">#B1BCBE</color>
     <color name="ColorPrimary">#FF5722</color>
     <color name="ColorPrimaryDark">#E64A19</color>
+    <color name="background_skull_tint">#6adfdcdc</color>
 
 </resources>

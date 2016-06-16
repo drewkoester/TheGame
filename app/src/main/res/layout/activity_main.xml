@@ -80,7 +80,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:gravity="center|top"
-                android:src="@drawable/back_of_card"
                 android:text="@string/foundation_pile_hund"
                 android:textAlignment="center"
                 android:textSize="8sp"
@@ -92,7 +91,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:src="@drawable/back_of_card"
                 android:text="@string/hundred"
                 android:textSize="@dimen/card_value_text_size"
                 android:textStyle="bold" />
@@ -119,7 +117,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:gravity="center|top"
-                android:src="@drawable/back_of_card"
                 android:text="@string/foundation_pile_hund"
                 android:textAlignment="center"
                 android:textSize="8sp"
@@ -130,7 +127,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:src="@drawable/back_of_card"
                 android:text="@string/hundred"
                 android:textSize="@dimen/card_value_text_size"
                 android:textStyle="bold" />
@@ -156,7 +152,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:gravity="center|top"
-                android:src="@drawable/back_of_card"
                 android:text="@string/foundation_pile_zero"
                 android:textAlignment="center"
                 android:textSize="8sp"
@@ -167,7 +162,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:src="@drawable/back_of_card"
                 android:text="@string/zero"
                 android:textSize="@dimen/card_value_text_size"
                 android:textStyle="bold" />
@@ -194,7 +188,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:gravity="center|top"
-                android:src="@drawable/back_of_card"
                 android:text="@string/foundation_pile_zero"
                 android:textAlignment="center"
                 android:textSize="8sp"
@@ -205,7 +198,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:src="@drawable/back_of_card"
                 android:text="@string/zero"
                 android:textSize="@dimen/card_value_text_size"
                 android:textStyle="bold" />
