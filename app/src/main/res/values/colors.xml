@@ -6,4 +6,5 @@
     <color name="ColorPrimaryDark">#E64A19</color>
     <color name="background_skull_tint">#6adfdcdc</color>
 
+    <color name="button_background">#d5d9da</color>
 </resources>

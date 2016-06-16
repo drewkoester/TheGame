@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_start"
             android:id="@+id/start_game_btn"
+            android:background="@drawable/layout_button"
             android:layout_margin="5dp"
             android:layout_gravity="center_horizontal" />
 
@@ -40,6 +41,7 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_rules"
             android:id="@+id/rules_btn"
+            android:background="@drawable/layout_button"
             android:layout_margin="5dp"
             android:layout_gravity="center_horizontal" />
 
@@ -48,6 +50,7 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_settings"
             android:id="@+id/setting_btn"
+            android:background="@drawable/layout_button"
             android:layout_margin="5dp"
             android:layout_gravity="center_horizontal" />
 

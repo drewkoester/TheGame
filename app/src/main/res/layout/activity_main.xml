@@ -372,6 +372,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:background="@drawable/layout_button"
             android:text="@string/label_end_turn"
             android:enabled="false"/>
     </LinearLayout>

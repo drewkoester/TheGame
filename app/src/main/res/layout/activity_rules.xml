@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/label_ok"
         android:id="@+id/button"
+        android:background="@drawable/layout_button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 

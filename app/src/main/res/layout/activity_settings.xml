@@ -101,6 +101,7 @@
         android:layout_height="wrap_content"
         android:text="@string/label_ok"
         android:id="@+id/ok_btn"
+        android:background="@drawable/layout_button"
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
