@@ -111,7 +111,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
 
         //increase the playerDischargeCount
         currentDischarge = 0;
-        //check to enable endTurn
+        //disable the end_turn_btn
         findViewById(R.id.end_turn_btn).setEnabled(false);
     }
 
