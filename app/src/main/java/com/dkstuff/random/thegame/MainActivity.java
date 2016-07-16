@@ -102,7 +102,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
 
         //check that there are any valid plays left; if none left alert the player.
         if (!checkForValidPlay(player1)) {
-            Log.d("TAG", "END THE GAME");
+            //Log.d("TAG", "END THE GAME");
             alertMessage();
         }
 
@@ -132,19 +132,19 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
         //Reset the rules based on preferences
         switch (gameDifficulty) {
             case 3:
-                Log.d(TAG, "NORMAL");
+                //Log.d(TAG, "NORMAL");
                 deckSize = 99;
                 easyMode = false;
                 break;
 
             case 2:
-                Log.d(TAG, "Quick");
+                //Log.d(TAG, "Quick");
                 deckSize = 49;
                 easyMode = false;
                 break;
 
             case 1:
-                Log.d(TAG, "Easy");
+                //Log.d(TAG, "Easy");
                 deckSize = 49; //9
                 easyMode = true;
                 break;
@@ -204,46 +204,6 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
                 localTextView.setVisibility(View.INVISIBLE);
             }
         }
-
-//        //spot 1
-//        TextView localTextView = (TextView) findViewById(R.id.hand_card_1);
-//        localTextView.setText(String.valueOf(playersCards[0].getValue()));
-//        localTextView.setVisibility(View.VISIBLE);
-//
-//        //spot 2
-//        localTextView = (TextView) findViewById(R.id.hand_card_2);
-//        localTextView.setText(String.valueOf(playersCards[1].getValue()));
-//        localTextView.setVisibility(View.VISIBLE);
-//
-//        //spot 3
-//        localTextView = (TextView) findViewById(R.id.hand_card_3);
-//        localTextView.setText(String.valueOf(playersCards[2].getValue()));
-//        localTextView.setVisibility(View.VISIBLE);
-//
-//        //spot 4
-//        localTextView = (TextView) findViewById(R.id.hand_card_4);
-//        localTextView.setText(String.valueOf(playersCards[3].getValue()));
-//        localTextView.setVisibility(View.VISIBLE);
-//
-//        //spot 5
-//        localTextView = (TextView) findViewById(R.id.hand_card_5);
-//        localTextView.setText(String.valueOf(playersCards[4].getValue()));
-//        localTextView.setVisibility(View.VISIBLE);
-//
-//        //spot 6
-//        localTextView = (TextView) findViewById(R.id.hand_card_6);
-//        localTextView.setText(String.valueOf(playersCards[5].getValue()));
-//        localTextView.setVisibility(View.VISIBLE);
-//
-//        //spot 7
-//        localTextView = (TextView) findViewById(R.id.hand_card_7);
-//        localTextView.setText(String.valueOf(playersCards[6].getValue()));
-//        localTextView.setVisibility(View.VISIBLE);
-//
-//        //spot 8
-//        localTextView = (TextView) findViewById(R.id.hand_card_8);
-//        localTextView.setText(String.valueOf(playersCards[7].getValue()));
-//        localTextView.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -263,7 +223,7 @@ public class MainActivity extends Activity implements OnDragListener, View.OnLon
             case R.id.action_rules:
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
-                Log.d(TAG, "Rules");
+                //Log.d(TAG, "Rules");
                 return true;
 
             default:
